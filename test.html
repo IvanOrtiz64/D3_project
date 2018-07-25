@@ -91,12 +91,9 @@
 		<div id="slide2" class="w3-container">
             <h4>Title:  Difference between deltas from national rates</h4>
             <div class="w3-small">
-                <p>This illustrates the difference between the states' deltas from the national poverty and college graduate rates.  This
-                    helps show which states do and don't support the theory.  DC is interesting in that it has a very high college graduate percentage
-                    but still has a high poverty rate.  Wyoming is interesting in that it has a college graduate rate below the national rate
-                    but also has a poverty rate below the national rate. <strong>
-                        Hover over each state to view its data.
-                    </strong></br></br></br></p>
+                <p>
+                    This is part 2 
+                    </p>
             </div>
 
 			<div id="slide3chart1"></div>
@@ -113,9 +110,7 @@
                 <div class="w3-content">
                 <h4>Title:  The raw data</h4>
                 <div class="w3-small">
-                    <p>This slide provides the raw source data with tooltips and filtering to help understand each state's data and it's place
-                    compared to the rest of the nation.  <strong>You can select the subset of data you are interested in by clicking the box
-                         in the legend.  Click on, click off.  Additionally, you can hover over each bar to view its exact value.</strong></p>
+                    <p>  Next slide</p>
                 </div>
                 </div>
             </div>
@@ -128,17 +123,7 @@
 </div>
 
 
-
-
-<div class="w3-center w3-bottom">
-    <button class="w3-button demo" onclick="currentDiv(1)">1</button>
-    <button class="w3-button demo" onclick="currentDiv(2)">2</button>
-    <button class="w3-button demo" onclick="currentDiv(3)">3</button>
-</div>
-<div class="tooltip w3-left" width="400"></div>
-<div class="tooltip2" width="400"></div>
-</div>
-
+<!-- Scripts -->
 <script src="slide1chart1.js"></script>
 <script src="slide3chart1.js"></script>
 <script src="slide4chart1test.js"></script>
@@ -147,16 +132,11 @@
 
 
 <script>
-
 /////
 //slide 1 chart 1
 /////
 slide1chart1();
 
-/////
-//slide 2 chart 1
-/////
-//slide2chart1();
 
 /////
 //slide 3 chart 1
@@ -167,45 +147,68 @@ slide4chart1test();
 //////
 /// navigation
 //////
-
 function type(d) {
   d.frequency = +d.frequency;
   return d;
 }
 
 
+// Initialize to first graph
 var slideIndex = 1;
 showDivs(slideIndex);
 
+// 
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
 
+//
 function currentDiv(n) {
   showDivs(slideIndex = n);
 }
 
+//
 function showDivs(n) {
   var i;
+
+  // Get all slide divs
   var x = document.getElementsByClassName("mySlides");
+
+  // Get list of button divs
   var dots = document.getElementsByClassName("demo");
+
+  //
   if (n > x.length) {slideIndex = 1}    
   if (n < 1) {slideIndex = x.length}
+
+  // Hides Elements not being used
   for (i = 0; i < x.length; i++) {
      x[i].style.display = "none";  
   }
+
+  // Change class of buttons
   for (i = 0; i < dots.length; i++) {
      dots[i].className = dots[i].className.replace(" w3-red", "");
   }
+
+
+  // Set current button and current graph text 
   x[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " w3-red";
 }
 
-
 </script>
 
 
+<!--  Slide Show Buttons  - Switch graphs when clicked          --> 
+<div align="center">
+    <button class="w3-button demo" onclick="currentDiv(1)">1</button>
+    <button class="w3-button demo" onclick="currentDiv(2)">2</button>
+    <button class="w3-button demo" onclick="currentDiv(3)">3</button>
+</div>
 
+<div class="tooltip w3-left" width="400"></div>
+<div class="tooltip2" width="400"></div>
 
 </body>
 </html>
