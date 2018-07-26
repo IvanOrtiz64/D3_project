@@ -1,6 +1,7 @@
 /**
- * 
+ *  Found Code example at https://bl.ocks.org/mbostock/3883245.
  */
+
 function slide1chart1() {
 
     function tooltipHtml(n, d) {    /* function to create html content string in tooltip div. */
@@ -13,77 +14,90 @@ function slide1chart1() {
     }
 
 
+    // // Read Data and store in bitcoinData var
+    // var bitcoinData = {};
+    // d3.csv("btc.csv", function(data) {
+    //     bitcoinData = data;
+    //     // console.log(bitcoinData);
+    // });
 
-    var statesData = {};
-    d3.csv("dataset.csv", function(data) {
 
-        console.log(data);
+    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+        width = +(window.innerWidth*.75) - margin.left - margin.right,
+        height = +(window.innerHeight*.6) - margin.top - margin.bottom;
 
-       // console.log(data.length);
-       // data.forEach(function(d)
-       for(var i = 0; i < data.length; i++) {
+    // Set up svg for graph
+    var g = d3.select("#slide1chart1").append("svg")
+            .attr("id","ChartOne")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .style("width",((window.innerWidth*.8) - margin.left - margin.right) + 'px')
+            .style("height",((window.innerHeight*.7) - margin.top - margin.bottom) + 'px');
 
-                statesData[data[i].State] = {
-                    poverty: data[i].Poverty,
-                    unemployment: data[i].Unemployment,
-                    college: data[i].College,
-                    collegediff: data[i].College_Diff,
-                    povertydiff: data[i].Poverty_Diff,
 
-//                    low: 50, high: 100,
-//                    avg: 75, color: "rgb(162, 172, 187)"
-                };
+    // Parser to format date
+    var parseTime = d3.timeParse("%e/%m/%Y");
 
-                var state = statesData[data[i].State];
-                if(state.collegediff > 0 && state.povertydiff < 0){
-                    state.color = "rgb(70, 135, 76)";
-                }else if(state.collegediff < 0 && state.povertydiff > 0){
-                    state.color = "rgb(70, 135, 76)";
-                }else{
-                    state.color = "rgb(211, 16, 52)";
-                }
+    // Scales
+    var x = d3.scaleTime()
+        .rangeRound([0, width]);
 
-                //red - rgb(211, 16, 52)
-                //green - rgb(45, 147, 54)
-        }
-        // );
-        // console.log(statesData);
+    var y = d3.scaleLinear()
+        .rangeRound([height, 0]);
 
-        /* draw states on id #statesvg */
-        var
-            margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = 960 - margin.left - margin.right,
-            height = 600 - margin.top - margin.bottom;
+    // Line graph
+    var line = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.price); });
 
-        var tmp = d3.select("#slide1chart1").append("svg").attr("id","statesvg1");
 
-        d3.select("#statesvg1").append("rect").attr("x",400).attr("width",20).attr("height",20).style("fill","rgb(211, 16, 52)");
-        d3.select("#statesvg1").append("text").attr("x",380).attr("y",8).attr("dy", ".55em")
-            .text("No").attr("width",20).attr("height",20).attr("color","black");
+    // Read and parse data
+    d3.tsv("btc.csv", function(d) {
+        console.log("parsing Date " + parseTime(d.date));
+        console.log("Price " + d.price);
+        d.date = parseTime(d.date);
+        d.price = +d.price;
 
-        d3.select("#statesvg1").append("rect").attr("x",450).attr("width",20).attr("height",20).style("fill","rgb(70, 135, 76)");
-        d3.select("#statesvg1").append("text").attr("x",430).attr("y",8).attr("dy", ".55em")
-            .text("Yes").attr("width",20).attr("height",20).attr("color","black");
+        console.log("d " + d);
+        return d;
+    }, function(error, data) {
+        if (error) throw error;
 
-        tmp.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain(d3.extent(data, function(d) { return d.price; }));
 
-        uStates.draw("#statesvg1", statesData, tooltipHtml);
+        g.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .select(".domain")
+            .remove();
+
+        g.append("g")
+            .call(d3.axisLeft(y))
+            .append("text")
+            .attr("fill", "#000")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("Price ($)");
+
+        g.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", line);
+
+
     });
 
-    //ABOUT VIZ POP UP
 
-    d3.select("#aboutpara").style("opacity",0).text("hi there you guys!!!");;
 
-    d3.select("#aboutbutton")
-        .on("click",function()
-            {
-                var active   = aboutpara.active ? false : true,
-                    newOpacity = active ? 1 : 0;
-                // Hide or show the elements
-                d3.select("#aboutpara").style("opacity", newOpacity);
-                aboutpara.active = active;
 
-            });
+
+
 
 
 }
