@@ -27,7 +27,7 @@ body {
     border-radius: 8px;
     float: right;
     padding: 4px 6px;
-    margin-right: 25px;
+    margin-right: 40px;
 }
 
 .descButton:hover {
@@ -35,6 +35,47 @@ body {
     color: white;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+
+
+/*    Classes for the graphs */
+.line {
+    fill: none;
+    stroke: darkorange;
+    stroke-width: 2px;
+}
+
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: #F1F3F3;
+    stroke: #6F257F;
+    stroke-width: 5px;
+}
+
+.hover-line {
+    stroke: #6F257F;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
+
+
+
 
 
 
