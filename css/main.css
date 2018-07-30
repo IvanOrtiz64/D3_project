@@ -1,0 +1,184 @@
+/***************************
+ *
+ *
+ *
+ *
+ ****************************/
+
+/***************************
+ *  Classes for the main page
+ ****************************/
+body {
+    font: 14px sans-serif;
+    color: black;
+}
+
+.mainTittle{
+    font: 24px sans-serif;
+    text-align: center;
+    color: dodgerblue;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.descButton {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    background-color: #a9a9a9;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    float: right;
+    padding: 4px 6px;
+    margin-top: 20px;
+    margin-right: 75px;
+}
+
+.descButton:hover {
+    background-color: #FF9900; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.header img {
+    float: left;
+    width: 75px;
+    height: 75px;
+}
+
+.header h1 {
+    position: relative;
+    top: 18px;
+    left: 10px;
+}
+
+
+/***************************
+ *  Classes for the graphs
+ ****************************/
+.line {
+    fill: none;
+    stroke: darkorange;
+    stroke-width: 2px;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: #F1F3F3;
+    stroke: #6F257F;
+    stroke-width: 5px;
+}
+
+.hover-line {
+    stroke: #6F257F;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
+
+/**********
+*  Line chart
+*/
+
+.point-paths path {
+    /*
+    fill: #eee;
+    stroke: #aaa;
+    */
+    stroke-opacity: 0;
+    fill-opacity: 0;
+}
+
+
+.lines path {
+    fill: none;
+    stroke-width: 1.5px;
+    stroke-linecap: round;
+
+    transition: stroke-width 250ms linear;
+    -moz-transition: stroke-width 250ms linear;
+    -webkit-transition: stroke-width 250ms linear;
+
+    transition-delay: 250ms;
+    -moz-transition-delay: 250ms;
+    -webkit-transition-delay: 250ms;
+}
+
+.line.hover path {
+    stroke-width: 6px;
+}
+
+.lines .point {
+    transition: stroke-width 250ms linear;
+    -moz-transition: stroke-width 250ms linear;
+    -webkit-transition: stroke-width 250ms linear;
+}
+
+.lines .point.hover {
+    stroke-width: 20px;
+    stroke-opacity: .5;
+}
+
+
+/***************************
+ *  Classes for the modal (about button)
+ ****************************/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 75%;
+    height: 75%;
+    font-size: 16px;
+
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: darkorange;
+    text-decoration: none;
+    cursor: pointer;
+}
